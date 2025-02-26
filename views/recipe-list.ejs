@@ -1,0 +1,78 @@
+<%- include('partials/head') %>  
+<script src="/javascripts/recipe-list.js"></script>
+<script src="/javascripts/recipe-filter.js"></script>
+<body>
+    <header>
+        <h1>Recipes by Protein Type</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/recipe-list" class="active">Recipe List</a></li>
+                <li><a href="/add-recipe">Add Recipe</a></li>
+            </ul>
+        </nav>
+    </header>
+    <hr>
+    <% 
+        const groupedRecipes = {}; 
+        recipes.forEach(recipe => {
+            if (!groupedRecipes[recipe.category]) {
+                groupedRecipes[recipe.category] = [];
+            }
+            groupedRecipes[recipe.category].push(recipe);
+        });
+    %>
+    <label id="ingredient-filter-label" for="ingredient-filter">Filter by Ingredient:</label>
+    <select id="ingredient-filter">
+        <option value="">-- Select an ingredient --</option>
+        <option value="Salt">Salt</option>
+        <option value="Pepper">Pepper</option>
+        <option value="Garlic">Garlic</option>
+        <option value="Olive Oil">Olive Oil</option>
+        <option value="Lemon">Lemon</option>
+        <option value="Thyme">Thyme</option>
+        <option value="Basil">Basil</option>
+        <option value="Paprika">Paprika</option>
+        <option value="Beef">Beef</option>
+        <option value="Chicken">Chicken</option>
+        <option value="Pork">Pork</option>
+        <option value="Buns">Buns</option>
+        <option value="Barbecue Sauce">Barbecue Sauce</option>
+        <option value="Taco Shells">Taco Shells</option>
+    </select>
+
+    <% Object.keys(groupedRecipes).forEach(category => { %>
+        <div class="category-section">
+            <h2 class="category-banner"><%= category %></h2>
+            <div class="recipes-container">
+                <% groupedRecipes[category].forEach(recipe => { %>
+                    <div class="recipe-box">
+                        <h3 class="recipe-title"><%= recipe.name %></h3>
+                        <p class="recipe-description"><%= recipe.description %></p>
+                        <div class="recipe-content">
+                            <div class="ingredients">
+                                <p><strong>Ingredients:</strong></p>
+                                <ol>
+                                    <% recipe.ingredients.split(',').forEach(ingredient => { %>
+                                        <li><%= ingredient.trim() %></li>
+                                    <% }); %>
+                                </ol>
+                            </div>
+                            <div class="instructions">
+                                <p><strong>Instructions:</strong></p>
+                                <ol>
+                                    <% recipe.instructions.split(';').forEach(instruction => { %>
+                                        <li><%= instruction.trim() %></li>
+                                    <% }); %>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+    <% }); %>
+
+    <%- include('partials/footer') %>  
+</body>
+</html>
