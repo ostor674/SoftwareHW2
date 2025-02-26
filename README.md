@@ -8,6 +8,7 @@
 4. To access the website, go to `http://localhost:8080/` (Note that I am using port 8080, not 3000)
 
 ### Website Interaction
-- Recipes can sorted by ingredient using a dropdown menu on the Recipe List page
-- Hovering over ingredients on the Recipe List page will display a short fun fact
+- Recipes can sorted by ingredient using a dropdown menu on the Recipe List page (Interactive Javascript)
+- Hovering over ingredients on the Recipe List page will display a short fun fact (Interactive Javascript)
 - Recipes can be added using the Add Recipe page
+
